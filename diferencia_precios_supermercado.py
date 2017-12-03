@@ -14,16 +14,22 @@ def fun_cual_es_mas_barato(precioConocidos, precio_nuevo):
 	elif cal < 0:
 		print "El producto es menor. %i " % precioConocidos
 
-def fun_dame_valor_porKilo(kilos, total):
-	resultado = total/kilos
-	print "{0:.3f}".format(resultado)
+def fun_dame_valor_porKilo(kilos, total, kom):
+	precioxquilo = total/kilos
+	precioxgramo = precioxquilo/1000 
+	#eleccion en minilitros
+	pri_mini="{0:.3f}".format(precioxquilo)
+	pri_mini="{0:.3f}".format(precioxgramo)
+
 def fun_preguntar_basico():
 	total = int(raw_input("Precio del prducto a comparar: "))
-	kilos = int(raw_input("Peso de tu producto(kilos): "))
-	minilitros = int(raw_input("Peso de tu producto(minilitros): "))
+	kilos = int(raw_input("Peso tu producto(kilos): "))
 	siono = raw_input("Este producto se divide en unidade (y/n): ")
-	if res_menu == "y":
-		unidad = int(raw_input("Dime la cantidad de unidades: "))
+	if siono == "y":
+		mont_unity = int(raw_input("Dime la cantidad de unidades: "))
+	elif siono == "n":
+		print "Anotado tiene cero unidades."
+		mont_unity = int(0)
 	else:
 		print 'error'
 #-----------inicio del menu 
