@@ -1,65 +1,92 @@
 #!/usr/bin/python
-import os 
-def fun_tittle():
+import os
+def title():
 	print "======================================================"
 	print "==Se rrequiere que conteste una serie de preguntas.==="
 	print "===========Disculpe por las molestias.================"
 	print "======================================================"
-def fun_cual_es_mas_barato(precioConocidos, precio_nuevo):
-	cal = int(precioConocidos - precio_nuevo)
-	if cal > 0:
-		print "Es barato, compralo %i " % precioConocidos
-	elif cal == 0:
-		print "Tienen el mismo valor " 
-	elif cal < 0:
-		print "El producto es menor. %i " % precioConocidos
-
-def fun_dame_valor_porKilo(kilos, total, kom):
-	precioxquilo = total/kilos
-	precioxgramo = precioxquilo/1000 
-	#eleccion en minilitros
-	pri_mini="{0:.3f}".format(precioxquilo)
-	pri_mini="{0:.3f}".format(precioxgramo)
-
-def fun_preguntar_basico():
-	total = int(raw_input("Precio del prducto a comparar: "))
-	kilos = int(raw_input("Peso tu producto(kilos): "))
-	siono = raw_input("Este producto se divide en unidade (y/n): ")
-	if siono == "y":
-		mont_unity = int(raw_input("Dime la cantidad de unidades: "))
-	elif siono == "n":
-		print "Anotado tiene cero unidades."
-		mont_unity = int(0)
-	else:
-		print 'error'
-#-----------inicio del menu 
-def menu():
-	print "======================================================"
-	print "============1- Cual es mas barato.========================="
-	print "============2- Comparar precio por kilo.=============="
-	print "============3- Comparar por minilitros.===================="
-	print "============4- Sacar el precio por unidad. =============="
-	print "======================================================"
-	res_menu = int(raw_input("Cual es tu respuesta: "))
-	os.system('clear')
+		
+class Producto(object):
+	def __init__(self, numeroProducto):
+		self.numeroProducto = numeroProducto
+		print "producto numero %s" % self.numeroProducto
+		self.nombreProducto=raw_input("Nombre del producto numero ----%s---- comparar: " % self.numeroProducto) 
+		self.total1 = float(raw_input("Precio total del producto  ----%s----: " % self.nombreProducto.upper()))
+		
+		print "==============================="
+		print "==Esta comformato por=================================".upper()
+		print "==1) Kilos y gramos======================================"
+		print "==2) liquido============================================="
+		print "==3) Unidades============================================"
+		print "======================================================"
+		
+		self.pre1 = input("respuesta 1, 3: ")
+		if self.pre1 == 1:
+			self.compuesto = raw_input("Cantidad en kilos: ")
+		elif self.pre1 == 2:
+			self.compuesto = raw_input("Cantidad en litros: ")
+		elif self.pre1 == 3:
+			print "En construccion."
+		else:
+			print "Su respuesta no es correcta."
 	
-	if res_menu == 1: 		
-		mas_barato=fun_cual_es_mas_barato(precio_nuevo, total)
-	elif res_menu == 2: 
-		print "obtener el valor de un kilo de mi producto. "
-		yafun=fun_dame_valor_porKilo(kilos, total)
-	elif res_menu == 3:
-		minilitros=fun_dame_valor_porkilo(minilitros, total)
- 	elif res_menu == 4:
- 		unidad=fun_dame_valor_porKilo(unidad, total)
-	else:
-		print "ERROR"	
-		var_menu=menu()
+	def fun_valor_Kilo_minilitro(self):
+		precioxquilo = float(self.total1/self.compuesto)
+		precioxgramo = float(precioxquilo/1000 )
+		#eleccion en minilitros
+		pri_kilo="{0:.3f}".format(precioxquilo)
+		pri_gramo="{0:.3f}".format(precioxgramo)
+		print "%s %s \n%s %s" %(pri_kilo, self.nombreProducto, pri_gramo, self.nombreProducto)
+def main(var_respuesta):	
+	#ordenar esto
+	if var_respuesta == 1:
+		producto1=Producto(1)
+	elif var_respuesta == 2:
+		producto1=Producto(1)
+		producto2=Producto(2)
+		producto1.fun_valor_Kilo_minilitro()
+		producto2.fun_valor_Kilo_minilitro()
+	elif var_respuesta == 3:
+		producto2=Producto(1)
+		producto2=Producto(2)
+		producto2=Producto(3)
+		producto1.fun_valor_Kilo_minilitro()
+		producto2.fun_valor_Kilo_minilitro()
+		producto3.fun_valor_Kilo_minilitro()		
+	elif var_respuesta == 4:
+		producto2=Producto(1)
+		producto2=Producto(2)
+		producto2=Producto(3)
+		producto2=Producto(4)
+		producto1.fun_valor_Kilo_minilitro()
+		producto2.fun_valor_Kilo_minilitro()
+		producto3.fun_valor_Kilo_minilitro()
+		producto4.fun_valor_Kilo_minilitro()
+	elif var_respuesta == 5:
+		producto1=Producto(1)
+		producto2=Producto(2)
+		producto3=Producto(3)
+		producto4=Producto(4)
+		producto5=Producto(5)
+		producto1.fun_valor_Kilo_minilitro()
+		producto2.fun_valor_Kilo_minilitro()
+		producto3.fun_valor_Kilo_minilitro()
+		producto4.fun_valor_Kilo_minilitro()
+ 		producto5.fun_valor_Kilo_minilitro()
+		#-----------inicio del menu 
 
+os.system('clear')
 while True:
-	var_title=fun_tittle()
-	var_preguntas=fun_preguntar_basico()
-	var_menu=menu()
+	#cantidad de listas posibles
+	titulos=title()
+	
+	try:
 
+		var_respuesta=input("Cantidad de productos que desea comparar.(1,5): ")
+		inicio=main(var_respuesta)
+	except NameError:
+		raw_input("solo puede poner numero, press enter".upper())
+		os.system('clear')
+	
 
 
